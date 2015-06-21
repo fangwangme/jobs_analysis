@@ -1,0 +1,3 @@
+*.py[co]
+*.html
+.DS_Store
