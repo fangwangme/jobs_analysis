@@ -44,9 +44,20 @@ def crawl_position_info_by_id(position_id):
     return
 
 
+def get_crawled_position_ids():
+
+    con = get_mongo_collection()
+
+    return list(con.distinct('position_id'))
+
+
 def crawl_all():
     position_id_list = get_distinct_position_id()
+
+    crawled_positions = get_crawled_position_ids()
     for each_position_id in position_id_list:
+        if each_position_id in crawled_positions:
+            continue
         time.sleep(5)
         crawl_position_info_by_id(each_position_id)
 
